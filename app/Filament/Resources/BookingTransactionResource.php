@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingTransactionResource\Pages;
+use App\Jobs\SendBookingApprovedEmail;
 use App\Models\BookingTransaction;
 use App\Models\Ticket;
 use Filament\Forms\Components\DatePicker;
@@ -32,7 +33,7 @@ class BookingTransactionResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return (string) BookingTransaction::where('is_paid', false)->count();
+        return (string)BookingTransaction::where('is_paid', false)->count();
     }
 
     public static ?string $navigationGroup = 'Customer';
@@ -122,7 +123,7 @@ class BookingTransactionResource extends Resource
                     ->action(function (BookingTransaction $record) {
                         $record->is_paid = true;
                         $record->save();
-
+                        SendBookingApprovedEmail::dispatch($record);
                         Notification::make()
                             ->title('Ticket Approved')
                             ->success()

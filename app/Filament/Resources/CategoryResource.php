@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Doctrine\DBAL\Schema\Schema;
 use Filament\Forms;
@@ -33,6 +32,7 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')->required()->maxLength(255),
                 FileUpload::make('icon')->image()->required(),
+                FileUpload::make('icon_white')->image()->required(),
             ]);
     }
 
@@ -47,7 +47,7 @@ class CategoryResource extends Resource
                 //
             ])
             ->actions([
-                ActionsViewAction::make(),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

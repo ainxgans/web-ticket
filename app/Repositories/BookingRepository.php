@@ -14,7 +14,7 @@ class BookingRepository implements BookingRepositoryInterface
 
     public function findByTrxIdAndPhoneNumber($bookingId, $phoneNumber)
     {
-        return BookingTransaction::where('booking_id', $bookingId)
+        return BookingTransaction::where('booking_trx_id', $bookingId)
             ->where('phone_number', $phoneNumber)
             ->first();
     }
