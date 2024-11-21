@@ -1,4 +1,9 @@
+on:
 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 name: 🎉Deploy to FTP
 runs-on: ubuntu-latest
 steps:
