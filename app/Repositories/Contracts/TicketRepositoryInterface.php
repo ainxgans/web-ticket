@@ -8,4 +8,4 @@ interface TicketRepositoryInterface
     public function getAllNewTickets();
     public function find($id);
     public function getPrice($ticketId);
-}
+    }
